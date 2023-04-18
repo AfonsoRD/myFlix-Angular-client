@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
+import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -17,13 +18,15 @@ export class AppComponent {
       //Assign the dialog a width
       width: '400px',
     });
+    console.log('Button signup is working');
   }
 
   // This is the function that will open the dialog when the login button is clicked
   openUserLoginDialog(): void {
-    this.dialog.open(UserRegistrationFormComponent, {
+    this.dialog.open(UserLoginFormComponent, {
       //Assign the dialog a width
       width: '400px',
     });
+    console.log('Button login is working');
   }
 }

@@ -40,5 +40,6 @@ export class UserRegistrationFormComponent implements OnInit {
         });
       }
     );
+    console.log('signed up');
   }
 }

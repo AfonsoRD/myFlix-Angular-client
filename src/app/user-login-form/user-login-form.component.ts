@@ -35,5 +35,6 @@ export class UserLoginFormComponent implements OnInit {
         });
       }
     );
+    console.log('Successful login');
   }
 }
