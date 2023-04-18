@@ -18,4 +18,12 @@ export class AppComponent {
       width: '400px',
     });
   }
+
+  // This is the function that will open the dialog when the login button is clicked
+  openUserLoginDialog(): void {
+    this.dialog.open(UserRegistrationFormComponent, {
+      //Assign the dialog a width
+      width: '400px',
+    });
+  }
 }
