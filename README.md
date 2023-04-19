@@ -47,7 +47,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ### User Flow
 
-![User Flow](./assets/userflow.png)
+![User Flow](./assets/user-flow.png)
 
 #### Technical Dependencies
 
