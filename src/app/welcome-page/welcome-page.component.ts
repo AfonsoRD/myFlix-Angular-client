@@ -18,7 +18,7 @@ export class WelcomePageComponent implements OnInit {
       //Assign the dialog a width
       width: '400px',
     });
-    console.log('Button signup is working');
+    //console.log('Button signup is working');
   }
 
   // This is the function that will open the dialog when the login button is clicked
@@ -27,7 +27,7 @@ export class WelcomePageComponent implements OnInit {
       //Assign the dialog a width
       width: '400px',
     });
-    console.log('Button login is working');
+    //console.log('Button login is working');
   }
 
   openMoviesDialog(): void {
