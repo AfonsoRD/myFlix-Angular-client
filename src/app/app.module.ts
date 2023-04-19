@@ -30,6 +30,7 @@ import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { GenreComponent } from './genre/genre.component';
 import { DirectorComponent } from './director/director.component';
 import { UserFavoriteMoviesComponent } from './user-favorite-movies/user-favorite-movies.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
@@ -50,6 +51,7 @@ const appRoutes: Routes = [
     MovieDetailsComponent,
     UserProfileComponent,
     UserFavoriteMoviesComponent,
+    NavbarComponent,
   ],
   imports: [
     AppRoutingModule,
