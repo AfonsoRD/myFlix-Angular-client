@@ -9,24 +9,35 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './welcome-page.component.html',
   styleUrls: ['./welcome-page.component.scss'],
 })
-export class WelcomePageComponent implements OnInit {
+export class WelcomePageComponent {
+  title = 'myFlix-Angular-client';
+
+  /**
+   * Conctructor makes MatDialog available via this.dialog inside the class
+   * @param dialog
+   */
   constructor(public dialog: MatDialog) {}
-  ngOnInit(): void {}
-  // This is the function that will open the dialog when the signup button is clicked
+
+  /**
+   * This is the function that will open the dialog when the signup button is clicked
+   * @function openUserRegistrationDialog
+   */
   openUserRegistrationDialog(): void {
     this.dialog.open(UserRegistrationFormComponent, {
-      //Assign the dialog a width
+      // Assigning the dialog a width
       width: '280px',
     });
-    //console.log('Button signup is working');
   }
 
-  // This is the function that will open the dialog when the login button is clicked
+  //
+  /**
+   * This is the function that will open the dialog when the Login button is clicked
+   * @function openUserLoginDialog
+   */
   openUserLoginDialog(): void {
     this.dialog.open(UserLoginFormComponent, {
-      //Assign the dialog a width
+      // Assigning the dialog a width
       width: '280px',
     });
-    //console.log('Button login is working');
   }
 }

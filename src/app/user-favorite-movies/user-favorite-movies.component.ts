@@ -91,7 +91,7 @@ export class UserFavoriteMoviesComponent {
       data: {
         Name: name,
         Bio: bio,
-        Birth: birthday,
+        Birthdays: birthday,
       },
     });
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 
 import { MatDialog } from '@angular/material/dialog';
@@ -29,25 +29,10 @@ export class MovieCardComponent {
   }
 
   /**
-   * Fetch movies via API and set movies state to returned JSON file
-   * @returns array holding movies objects
-   * @function getMovies
+   * This function makes API call to get favorite movies of specific user
+   * @function getFavoriteMovies
+   * @returns array with movies id, which are included to the list of favorites
    */
-
-  getMovies(): void {
-    this.fetchApiData.getAllMovies().subscribe((resp: any) => {
-      this.movies = resp;
-      console.log(this.movies);
-      return this.movies;
-    });
-  }
-
-  /**
-   * Fetch user info via API and set favorites state to returned JSON file
-   * @returns array holding IDs of favorites
-   * @function getFavorites
-   */
-
   getFavoriteMovies(): void {
     this.fetchApiData.getUser().subscribe((resp: any) => {
       this.favorites = resp.FavoriteMovies;
@@ -102,6 +87,20 @@ export class MovieCardComponent {
   }
 
   /**
+   * Fetch movies via API and set movies state to returned JSON file
+   * @returns array holding movies objects
+   * @function getMovies
+   */
+
+  getMovies(): void {
+    this.fetchApiData.getAllMovies().subscribe((resp: any) => {
+      this.movies = resp;
+      console.log(this.movies);
+      return this.movies;
+    });
+  }
+
+  /**
    * Opens genre information from GenreComponent
    * @param {string} name
    * @param {string} description
@@ -109,6 +108,7 @@ export class MovieCardComponent {
    */
 
   openGenre(name: string, description: string): void {
+    console.log(name);
     this.dialog.open(GenreComponent, {
       data: {
         Name: name,
@@ -130,16 +130,18 @@ export class MovieCardComponent {
       data: {
         Name: name,
         Bio: bio,
-        Birth: birthday,
+        Birthday: birthday,
       },
     });
   }
 
   /**
-   * Opens movie details from MovieDetailsComponent
-   * @param {string} title
-   * @param {string} description
-   * @function openSummary
+   * his function opens dialog with detailed information about specific Movie
+   * @param title of specific Movie (comes from specific movie card)
+   * @param movieDirector of specific Movie (comes from specific movie card)
+   * @param movieGenre of specific Movie (comes from specific movie card)
+   * @param movieDescription of specific Movie (comes from specific movie card)
+   * @param movieImagePath of specific Movie (comes from specific movie card)
    */
 
   openSummary(
@@ -155,7 +157,7 @@ export class MovieCardComponent {
         Director: movieDirector,
         Genre: movieGenre,
         Description: movieDescription,
-        Image: movieImagePath,
+        ImageURL: movieImagePath,
       },
     });
   }
