@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 that makes it possible for the client app to communicate with the API or server - side. */
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
-
 import { NgModule } from '@angular/core';
 
 //Add angular material
@@ -12,7 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
@@ -30,6 +29,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { GenreComponent } from './genre/genre.component';
 import { DirectorComponent } from './director/director.component';
+import { UserFavoriteMoviesComponent } from './user-favorite-movies/user-favorite-movies.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
@@ -49,6 +49,7 @@ const appRoutes: Routes = [
     GenreComponent,
     MovieDetailsComponent,
     UserProfileComponent,
+    UserFavoriteMoviesComponent,
   ],
   imports: [
     AppRoutingModule,
