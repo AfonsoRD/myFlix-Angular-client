@@ -30,33 +30,38 @@ export class UserFavoriteMoviesComponent {
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
+      return this.movies;
     });
   }
 
+  // store user favorite Title in an array
   getFavorites(): void {
     this.fetchApiData.getUser().subscribe((resp: any) => {
       this.favorites = resp.FavoriteMovies;
+      return this.favorites;
     });
   }
 
+  // Push each movie object into an array if its Title matches a favorite
   setFavoriteMovies(): void {
     console.log(this.movies);
     this.favoriteMovies = [];
     this.favorites.forEach((favorite) => {
       this.movies.forEach((movie) => {
-        if (movie._id === favorite) {
+        if (movie.Title === favorite) {
           this.favoriteMovies.push(movie);
         }
       });
+      return this.favoriteMovies;
     });
   }
 
-  isFavorite(id: string): boolean {
-    return this.favorites.includes(id);
+  isFavorite(title: string): boolean {
+    return this.favorites.includes(title);
   }
 
-  addToFavorites(id: string): void {
-    this.fetchApiData.addFavoriteMovie(id).subscribe((result) => {
+  addToFavorites(title: string): void {
+    this.fetchApiData.addFavoriteMovie(title).subscribe((result) => {
       this.snackBar.open('Movie added to favorites', 'OK', {
         duration: 2000,
       });
@@ -64,9 +69,9 @@ export class UserFavoriteMoviesComponent {
     });
   }
 
-  removeFromFavorites(id: string): void {
-    console.log(id);
-    this.fetchApiData.removeFavoriteMovie(id).subscribe((result) => {
+  removeFromFavorites(title: string): void {
+    console.log(title);
+    this.fetchApiData.removeFavoriteMovie(title).subscribe((result) => {
       this.snackBar.open('Movie removed from favorites', 'OK', {
         duration: 2000,
       });
