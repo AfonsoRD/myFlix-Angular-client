@@ -25,7 +25,7 @@ export class MovieCardComponent {
 
   ngOnInit(): void {
     this.getMovies();
-    this.getFavorites();
+    this.getFavoriteMovies();
   }
 
   /**
@@ -48,7 +48,7 @@ export class MovieCardComponent {
    * @function getFavorites
    */
 
-  getFavorites(): void {
+  getFavoriteMovies(): void {
     this.fetchApiData.getUser().subscribe((resp: any) => {
       this.favorites = resp.FavoriteMovies;
       console.log(this.favorites);
@@ -78,7 +78,7 @@ export class MovieCardComponent {
     this.fetchApiData.addFavoriteMovie(id).subscribe((result) => {
       console.log(result);
       this.snackBar.open('Movie added to favorites', 'OK', {
-        duration: 2000,
+        duration: 4000,
       });
       this.ngOnInit();
     });
@@ -90,12 +90,12 @@ export class MovieCardComponent {
    * @function removeFromFavorites
    */
 
-  removeFromFavorites(id: string): void {
+  deleteFromFavorites(id: string): void {
     console.log(id);
-    this.fetchApiData.removeFavoriteMovie(id).subscribe((result) => {
+    this.fetchApiData.deleteFavoriteMovie(id).subscribe((result) => {
       console.log(result);
       this.snackBar.open('Movie removed from favorites', 'OK', {
-        duration: 2000,
+        duration: 4000,
       });
       this.ngOnInit();
     });
@@ -114,8 +114,6 @@ export class MovieCardComponent {
         Name: name,
         Description: description,
       },
-      panelClass: 'genre-dialog-background',
-      width: '400px',
     });
   }
 
@@ -134,8 +132,6 @@ export class MovieCardComponent {
         Bio: bio,
         Birth: birthday,
       },
-      panelClass: 'director-dialog-background',
-      width: '400px',
     });
   }
 
@@ -146,14 +142,21 @@ export class MovieCardComponent {
    * @function openSummary
    */
 
-  openSummary(title: string, description: string): void {
+  openSummary(
+    title: string,
+    movieDirector: string,
+    movieGenre: string,
+    movieDescription: string,
+    movieImagePath: string
+  ): void {
     this.dialog.open(MovieDetailsComponent, {
       data: {
         Title: title,
-        Description: description,
+        Director: movieDirector,
+        Genre: movieGenre,
+        Description: movieDescription,
+        Image: movieImagePath,
       },
-      panelClass: 'summary-dialog-background',
-      width: '400px',
     });
   }
 }

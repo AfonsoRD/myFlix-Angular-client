@@ -11,7 +11,9 @@ import { Router } from '@angular/router'; // Routing
 })
 export class UserProfileComponent implements OnInit {
   user: any = {};
-  initialInput: any = {};
+  movies: any[] = [];
+  favorites: any[] = [];
+
   @Input() updatedUser = {
     Username: '',
     Password: '',
@@ -21,13 +23,12 @@ export class UserProfileComponent implements OnInit {
 
   constructor(
     public fetchApiData: FetchApiDataService,
-    public dialogRef: MatDialogRef<UserProfileComponent>,
     public snackBar: MatSnackBar,
     public router: Router
   ) {}
 
   ngOnInit(): void {
-    this.getUserInfo();
+    this.getUser();
   }
 
   /**
@@ -36,7 +37,7 @@ export class UserProfileComponent implements OnInit {
    * @function getUserInfo
    */
 
-  getUserInfo(): void {
+  getUser(): void {
     this.fetchApiData.getUser().subscribe((resp: any) => {
       this.user = resp;
       console.log(this.user);
@@ -53,23 +54,14 @@ export class UserProfileComponent implements OnInit {
    * @function updateUserInfo
    */
 
-  updateUserInfo(): void {
-    this.fetchApiData.editUser(this.updatedUser).subscribe((result) => {
+  updateUserData(): void {
+    this.fetchApiData.updateUser(this.updatedUser).subscribe((result) => {
       console.log(result);
-      this.snackBar.open('User profile successfully updated', 'OK', {
-        duration: 2000,
+      this.snackBar.open('User profile was successfuly updated', 'OK', {
+        duration: 4000,
       });
-      if (this.user.Username !== result.Username) {
-        localStorage.clear();
-        this.router.navigate(['welcome']);
-        this.snackBar.open(
-          'User profile successfully updated. Please login using your new credentials',
-          'OK',
-          {
-            duration: 2000,
-          }
-        );
-      }
+      localStorage.setItem('username', result.Username);
+      window.location.reload();
     });
   }
 
@@ -78,19 +70,22 @@ export class UserProfileComponent implements OnInit {
    * @function deleteAccount
    */
 
-  deleteAccount(): void {
-    if (confirm('All your data will be lost - this cannnot be undone!')) {
+  deleteUser(): void {
+    if (
+      confirm(
+        'You are going to delete your account FOREVER. All data will be lost. Are you sure?'
+      )
+    ) {
       this.router.navigate(['welcome']).then(() => {
         this.snackBar.open(
           'You have successfully deleted your account - we are sorry to see you go!',
           'OK',
           {
-            duration: 2000,
+            duration: 4000,
           }
         );
       });
       this.fetchApiData.deleteUser().subscribe((result) => {
-        console.log(result);
         localStorage.clear();
       });
     }

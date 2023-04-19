@@ -14,7 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { DialogModule } from '@angular/cdk/dialog';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -68,14 +68,9 @@ const appRoutes: Routes = [
     MatFormFieldModule,
     MatIconModule,
     MatSnackBarModule,
+    MatToolbarModule,
   ],
-  providers: [
-    {
-      provide: MatDialogRef,
-      useValue: {},
-    },
-    DialogModule,
-  ],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -13,10 +13,19 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./user-registration-form.component.scss'],
 })
 export class UserRegistrationFormComponent implements OnInit {
-  @Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
+  /**
+   * The @userData object will then be passed into the API call in the registerUser function.
+   * @userData object contains: @Username (required), @Password (required), @Email (required), @Birthday
+   */
+  @Input() userData = {
+    Username: '',
+    Password: '',
+    Email: '',
+    Birthday: '',
+  };
 
   constructor(
-    public fetchApiData: FetchApiDataService,
+    public FetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserRegistrationFormComponent>,
     public snackBar: MatSnackBar
   ) {}
@@ -25,21 +34,21 @@ export class UserRegistrationFormComponent implements OnInit {
 
   // This is the function responsible for sending the form inputs to the backend
   registerUser(): void {
-    this.fetchApiData.userRegistration(this.userData).subscribe(
-      (result) => {
+    this.FetchApiData.userRegistration(this.userData).subscribe({
+      // if success, open snackBar to inform and close the login dialog,
+      next: (result) => {
         // Logic for a successful user registration goes here! (To be implemented)
-        this.dialogRef.close(); // This will close the modal on success!
-        this.snackBar.open(result, 'OK', {
-          duration: 2000,
+        this.dialogRef.close(); // this will close the modal on success
+        console.log(result);
+        this.snackBar.open('User registered successfully!', 'OK', {
+          duration: 4000,
         });
       },
-      (result) => {
+      // if fail, open snackBar to show error message
+      error: (result) => {
+        this.snackBar.open(result, 'OK', { duration: 4000 });
         console.log(result);
-        this.snackBar.open(result, 'OK', {
-          duration: 2000,
-        });
-      }
-    );
-    console.log('signed up');
+      },
+    });
   }
 }

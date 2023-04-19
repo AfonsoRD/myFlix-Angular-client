@@ -11,12 +11,12 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {}
 
   // Navigates to movies page
-  toMovies(): void {
+  allMovies(): void {
     this.router.navigate(['movies']);
   }
 
   // Navigates to user profile
-  toProfile(): void {
+  userProfile(): void {
     this.router.navigate(['profile']);
   }
 

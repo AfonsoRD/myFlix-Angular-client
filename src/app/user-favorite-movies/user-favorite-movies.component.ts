@@ -27,6 +27,14 @@ export class UserFavoriteMoviesComponent {
     this.setFavoriteMovies();
   }
 
+  // Push each movie object into an array if its Title matches a favorite
+  async setFavoriteMovies() {
+    let allMovies = await this.getMovies();
+    let favoriteMoviesTitle = await this.setFavoriteMovies();
+    console.log(allMovies);
+    console.log(favoriteMoviesTitle);
+  }
+
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
@@ -42,71 +50,67 @@ export class UserFavoriteMoviesComponent {
     });
   }
 
-  // Push each movie object into an array if its Title matches a favorite
-  setFavoriteMovies(): void {
-    console.log(this.movies);
-    this.favoriteMovies = [];
-    this.favorites.forEach((favorite) => {
-      this.movies.forEach((movie) => {
-        if (movie.Title === favorite) {
-          this.favoriteMovies.push(movie);
-        }
-      });
-      return this.favoriteMovies;
-    });
-  }
-
   isFavorite(title: string): boolean {
     return this.favorites.includes(title);
   }
 
   addToFavorites(title: string): void {
     this.fetchApiData.addFavoriteMovie(title).subscribe((result) => {
+      console.log(result);
       this.snackBar.open('Movie added to favorites', 'OK', {
-        duration: 2000,
+        duration: 4000,
       });
       this.ngOnInit();
     });
   }
 
-  removeFromFavorites(title: string): void {
+  deleteFromFavorites(title: string): void {
     console.log(title);
-    this.fetchApiData.removeFavoriteMovie(title).subscribe((result) => {
+    this.fetchApiData.deleteFavoriteMovie(title).subscribe((result) => {
+      console.log(result);
       this.snackBar.open('Movie removed from favorites', 'OK', {
-        duration: 2000,
+        duration: 4000,
       });
       this.ngOnInit();
     });
   }
 
   openGenre(name: string, description: string): void {
+    console.log(name);
     this.dialog.open(GenreComponent, {
       data: {
         Name: name,
         Description: description,
       },
-      width: '400px',
     });
   }
 
   openDirector(name: string, bio: string, birthday: string): void {
+    console.log(name);
     this.dialog.open(DirectorComponent, {
       data: {
         Name: name,
         Bio: bio,
         Birth: birthday,
       },
-      width: '400px',
     });
   }
 
-  openSummary(title: string, description: string): void {
+  openMovieDetails(
+    title: string,
+    movieDirector: string,
+    movieGenre: string,
+    movieDescription: string,
+    movieImagePath: string
+  ): void {
     this.dialog.open(MovieDetailsComponent, {
       data: {
         Title: title,
-        Description: description,
+        Director: movieDirector,
+        Genre: movieGenre,
+        Description: movieDescription,
+        Image: movieImagePath,
       },
-      width: '400px',
     });
   }
 }
